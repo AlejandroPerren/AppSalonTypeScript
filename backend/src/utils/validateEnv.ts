@@ -1,7 +1,6 @@
-import { cleanEnv } from "envalid";
-import { port, str } from "envalid/dist/validators";
+import { cleanEnv , port, str} from "envalid";
 
-export default cleanEnv(process.env, {
+export const env = cleanEnv(process.env, {
     MONGO_CONNECTION: str(),
-    PORT: port(),
+    PORT: port({default: 3000}),
 });
