@@ -1,12 +1,26 @@
 import express, { NextFunction, Request, Response }  from "express";
 import createHttpError, { isHttpError } from "http-errors";
+import cors from "cors"
+
 
 const app = express();
+app.use(express.json());
+
+
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    optionsSuccessStatus: 200 
+}
+
+app.use("api/auth", cors(corsOptions),)
+
 
 
 app.use((req, res, next) => {
     next(createHttpError(404, "Endpoint not found"));
 });
+
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
