@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response }  from "express";
 import createHttpError, { isHttpError } from "http-errors";
 import cors from "cors"
-
+import routerAuth from "./routes/auth"
 
 const app = express();
 app.use(express.json());
@@ -12,7 +12,7 @@ const corsOptions = {
     optionsSuccessStatus: 200 
 }
 
-app.use("api/auth", cors(corsOptions),)
+app.use("api/auth", cors(corsOptions),routerAuth)
 
 
 
