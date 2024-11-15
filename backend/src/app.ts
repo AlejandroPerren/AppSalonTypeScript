@@ -12,7 +12,7 @@ const corsOptions = {
     optionsSuccessStatus: 200 
 }
 
-app.use("api/auth", cors(corsOptions),routerAuth)
+app.use("/api/auth", cors(corsOptions),routerAuth)
 
 
 
