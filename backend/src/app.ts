@@ -1,8 +1,10 @@
 import express, { NextFunction, Request, Response }  from "express";
 import createHttpError, { isHttpError } from "http-errors";
-import cors from "cors"
+import cors from "cors";
 import routerAuth from "./routes/authRoutes"
 import routerServices from "./routes/servicesRoutes";
+import routerDates from "./routes/datesRoutes";
+
 const app = express();
 app.use(express.json());
 
@@ -12,8 +14,9 @@ const corsOptions = {
     optionsSuccessStatus: 200 
 }
 
-app.use("/api/auth", cors(corsOptions),routerAuth)
-app.use("/api/services",cors(corsOptions),routerServices)
+app.use("/api/auth", cors(corsOptions),routerAuth);
+app.use("/api/services",cors(corsOptions),routerServices);
+app.use("/api/dates",routerDates );
 
 
 app.use((req, res, next) => {
