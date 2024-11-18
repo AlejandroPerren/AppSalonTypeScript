@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import DateModel from "../../models/datesModel"; 
 
 export const getAppointments: RequestHandler = async (req, res, next) => {
+
   try {
    
     const appointments = await DateModel.find()

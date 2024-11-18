@@ -18,11 +18,9 @@ app.use("/api/auth", cors(corsOptions),routerAuth);
 app.use("/api/services",cors(corsOptions),routerServices);
 app.use("/api/dates",routerDates );
 
-
 app.use((req, res, next) => {
     next(createHttpError(404, "Endpoint not found"));
 });
-
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
