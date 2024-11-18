@@ -7,19 +7,19 @@ import router from "./routes/routes"
 
 function App() {
   if (import.meta.env.VITE_NODE_ENV === 'development') {
-    console.warn = () => {};  
+    console.warn = () => { };
   }
-  
+
   return (
     <>
-      
+
       <CssBaseline />
-      
+
       <Container
-        maxWidth={false} 
+        maxWidth={false}
         sx={{
-          height: '100vh', 
-          backgroundImage: `url(${bgImage})`, 
+          height: '100vh',
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           display: 'flex',
@@ -29,15 +29,17 @@ function App() {
       >
         <Box
           sx={{
-            width: '100%', 
-            maxWidth: 400, 
-            bgcolor: 'white', 
-            boxShadow: 3, 
-            p: 3, 
-            borderRadius: 2, 
+            width: '100%',
+            maxWidth: 400,
+            bgcolor: 'white',
+            boxShadow: 3,
+            p: 3,
+            borderRadius: 2,
           }}
         >
+
           <RouterProvider router={router} />
+
         </Box>
       </Container>
     </>

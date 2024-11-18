@@ -4,8 +4,6 @@ import DateModel from "../../models/datesModel";
 import UserModel from "../../models/userModel"; 
 import ServicesModel from "../../models/servicesModel"; 
 
-
-
 interface CreateAppointmentBody {
   date: string;
   time: string;

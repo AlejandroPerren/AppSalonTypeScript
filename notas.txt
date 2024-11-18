@@ -2,3 +2,5 @@
 - Agregar estado de la cita para Cancelar?,
 - Boton que Manda Correo que Cancela
 - userId de los parametros del futuro Token
+- utils
+- context(Con redux)
