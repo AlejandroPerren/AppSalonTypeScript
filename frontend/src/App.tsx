@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import bgImage from "./assets/1.jpg"
 import { RouterProvider } from 'react-router-dom';
 import router from "./routes/routes"
+import Header from './components/Header';
 
 function App() {
   if (import.meta.env.VITE_NODE_ENV === 'development') {
@@ -14,7 +15,7 @@ function App() {
     <>
 
       <CssBaseline />
-
+      <Header/>
       <Container
         maxWidth={false}
         sx={{
