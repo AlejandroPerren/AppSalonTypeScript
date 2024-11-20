@@ -3,6 +3,7 @@ import SignUp from '../pages/auth/SignUp';
 import Login from '../pages/auth/Login';
 import Home from '../pages/general/Home';
 
+
 const router = createBrowserRouter([
   {
     path: '/signup',
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <Home />,
+    element:<Home />,
   },
 ]);
 

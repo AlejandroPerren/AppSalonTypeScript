@@ -4,3 +4,5 @@
 - userId de los parametros del futuro Token
 - utils
 - context(Con redux)
+- borrar todo de tailwind✅
+- Buscar como generar estilos personalizados
