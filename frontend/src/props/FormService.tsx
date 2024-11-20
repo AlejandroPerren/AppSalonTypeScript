@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
@@ -13,7 +12,7 @@ const FormService = () => {
             .number()
             .required("El precio es obligatorio")
             .typeError("Debe ser un número")
-            .min(1, "El precio debe ser mayor a 0"),
+            .min(0, "El precio debe ser Valido"),
     });
 
     // Inicialización del formulario con react-hook-form
@@ -21,13 +20,12 @@ const FormService = () => {
         resolver: yupResolver(schema),
     });
 
-    // Función para manejar el submit
     const onSubmit: SubmitHandler<ServiceCreateInterface> = async (data) => {
         try {
             const service = await createService(data);
             console.log("Servicio creado exitosamente:", service);
             alert("Servicio creado exitosamente");
-            reset(); // Reinicia el formulario
+            reset(); 
         } catch (error) {
             console.error("Error al crear el servicio:", error);
             alert("Hubo un error al crear el servicio");

@@ -14,7 +14,7 @@ const ServicesList = () => {
             try {
                 setServicesError(false);
                 setServicesLoading(true);
-                const services = await fetchServices.getServices();
+                const services = await fetchServices.getServices() ;
                 setServices(services);
             }catch(error){
                 console.error(error);
@@ -23,19 +23,27 @@ const ServicesList = () => {
                 setServicesLoading(false);
             }
         }
-    })
+        loadServices()
+    },[]);
 
     const ServicesListGrid =
-        <Grid2 container spacing={8} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid2 container spacing={8} columnSpacing={{ xs: 1, md: 2, sm: 3 }}>
             { services.map(service =>(
-                <CardContent>
-                    <Typography className="">${service.name}</Typography>
-                    <Typography>${service.price}</Typography>
+                <CardContent key={service._id}>
+                    <Typography className="">{service.name}</Typography>
+                    <Typography>{service.price}</Typography>
                 </CardContent>
             ))
 
             }
         </Grid2>
+          if (servicesLoading) {
+            return <Typography>Loading services...</Typography>;
+        }
+    
+        if (servicesError) {
+            return <Typography>Error loading services. Please try again.</Typography>;
+        }
 
   return (
     <Box>

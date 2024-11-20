@@ -18,7 +18,7 @@ async function fetchData(input: RequestInfo, init?: RequestInit){
 }
 
 
-export async function getServices():  Promise<Services>{
+export async function getServices():  Promise<Services[]>{
     const response = await fetchData(SummaryApi.GetServices.url, {method : SummaryApi.GetServices.method});
     return response.json()
 }
