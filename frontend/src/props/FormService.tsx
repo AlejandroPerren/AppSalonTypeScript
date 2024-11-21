@@ -1,59 +1,79 @@
+import React from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createService, ServiceCreateInterface } from "../network/fetchApiServices";
+import { createService, ServiceInterface, updateService } from "../network/fetchApiServices";
 
-const FormService = () => {
-    // Esquema de validación con Yup
+interface FormServiceProps {
+    mode: "create" | "edit";
+    serviceData?: ServiceInterface; 
+    onSuccess: () => void;
+}
+
+const FormService: React.FC<FormServiceProps> = ({ mode, serviceData, onSuccess }) => {
+
     const schema = yup.object().shape({
-        name: yup.string().required("El nombre es obligatorio").min(3, "El nombre debe tener al menos 3 caracteres"),
+        name: yup.string().required("El nombre es obligatorio").min(3, "Debe tener al menos 3 caracteres"),
         price: yup
             .number()
             .required("El precio es obligatorio")
             .typeError("Debe ser un número")
-            .min(0, "El precio debe ser Valido"),
+            .min(0, "El precio debe ser válido"),
     });
 
-    // Inicialización del formulario con react-hook-form
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<ServiceCreateInterface>({
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<ServiceInterface>({
         resolver: yupResolver(schema),
+        defaultValues: serviceData || {}, 
     });
 
-    const onSubmit: SubmitHandler<ServiceCreateInterface> = async (data) => {
+    React.useEffect(() => {
+        if (mode === "edit" && serviceData) {
+            setValue("name", serviceData.name);
+            setValue("price", serviceData.price);
+        }
+    }, [mode, serviceData, setValue]);
+
+    const onSubmit: SubmitHandler<ServiceInterface> = async (data) => {
         try {
-            const service = await createService(data);
-            console.log("Servicio creado exitosamente:", service);
-            alert("Servicio creado exitosamente");
-            reset(); 
+            if (mode === "create") {
+                await createService(data);
+                alert("Servicio creado exitosamente");
+            } else if (mode === "edit" && serviceData?.id) {  
+                await updateService(serviceData.id, data);  
+                alert("Servicio actualizado exitosamente");
+            } else {
+                alert("No se pudo encontrar el servicio para actualizar.");
+            }
+            reset();
+            onSuccess();
         } catch (error) {
-            console.error("Error al crear el servicio:", error);
-            alert("Hubo un error al crear el servicio");
+            console.error("Error al guardar el servicio:", error);
+            alert("Hubo un error al guardar el servicio");
         }
     };
-
-    // Estilo del formulario
+    
+  
     const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
         width: 400,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
+        bgcolor: "background.paper",
+        border: "2px solid #000",
         boxShadow: 24,
         p: 4,
     };
 
     return (
         <Box sx={style}>
-            <Typography id="keep-mounted-modal-title" align="center" variant="h6" component="h2">
-                Agrega Tu Servicio
+            <Typography align="center" variant="h6" component="h2">
+                {mode === "create" ? "Agregar Servicio" : "Editar Servicio"}
             </Typography>
 
-            {/* Formulario */}
             <form onSubmit={handleSubmit(onSubmit)}>
-                {/* Campo Nombre */}
+            
                 <TextField
                     {...register("name")}
                     fullWidth
@@ -64,7 +84,7 @@ const FormService = () => {
                     margin="normal"
                 />
 
-                {/* Campo Precio */}
+           
                 <TextField
                     {...register("price")}
                     fullWidth
@@ -75,9 +95,9 @@ const FormService = () => {
                     margin="normal"
                 />
 
-                {/* Botón Submit */}
+               
                 <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 2 }}>
-                    Crear Servicio
+                    {mode === "create" ? "Crear Servicio" : "Guardar Cambios"}
                 </Button>
             </form>
         </Box>
