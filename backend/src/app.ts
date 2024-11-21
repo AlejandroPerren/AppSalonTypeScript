@@ -4,10 +4,11 @@ import cors from "cors";
 import routerAuth from "./routes/authRoutes"
 import routerServices from "./routes/servicesRoutes";
 import routerDates from "./routes/datesRoutes";
+import morgan from "morgan"
 
 const app = express();
 app.use(express.json());
-
+app.use(morgan("dev"))
 
 const corsOptions = {
     origin: 'http://localhost:5173',

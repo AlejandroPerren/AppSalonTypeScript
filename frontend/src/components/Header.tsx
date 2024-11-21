@@ -4,6 +4,7 @@ import { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -50,17 +51,19 @@ const Header: React.FC = () => {
                         horizontal: "right",
                     }}
                 >
-                    <MenuItem onClick={handleMenuClose}>
-                        <HomeIcon sx={{ color: "blue", marginRight: 1 }} />
-                        Home
+                    <MenuItem onClick={handleMenuClose} component={Link} to={"/"}>
+                            <HomeIcon sx={{ color: "blue", marginRight: 1 }} />
+                            Home
                     </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
-                        <AccountCircleIcon sx={{ color: "green", marginRight: 1 }} />
-                        Account
+                    <MenuItem onClick={handleMenuClose} component={Link} to={"/"}>
+                            <AccountCircleIcon sx={{ color: "green", marginRight: 1 }} />
+                            Account
                     </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
-                        <LogoutIcon sx={{ color: "red", marginRight: 1 }} />
-                        Logout
+                    
+                    <MenuItem onClick={handleMenuClose} component={Link} to={"/"}>
+                            <LogoutIcon sx={{ color: "red", marginRight: 1 }} />
+                            Logout
+
                     </MenuItem>
                 </Menu>
 
