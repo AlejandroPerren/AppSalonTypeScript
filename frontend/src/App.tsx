@@ -31,7 +31,7 @@ function App() {
         <Box
           sx={{
             width: '100%',
-            maxWidth: 400,
+            maxWidth: 900,
             bgcolor: 'white',
             boxShadow: 3,
             p: 3,
