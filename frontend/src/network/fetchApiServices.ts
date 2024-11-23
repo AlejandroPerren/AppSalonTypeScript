@@ -23,13 +23,16 @@ export async function getServices():  Promise<Services[]>{
     return response.json()
 }
 
+
 export interface ServiceInterface{
     id?: string | undefined;
     name: string,
     price: number,
 }
 
+
 export async function createService(services: ServiceInterface): Promise<Services> {
+
     const response = await fetchData(SummaryApi.CreateService.url, 
         {method: SummaryApi.CreateService.method,
             headers: {
@@ -50,5 +53,6 @@ export async function updateService(serviceId: string, service: ServiceInterface
             body: JSON.stringify(service)
         })
         return response.json();
+
 }
 

@@ -1,8 +1,10 @@
+
 import React from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
 import { createService, ServiceInterface, updateService } from "../network/fetchApiServices";
 
 interface FormServiceProps {
@@ -15,10 +17,12 @@ const FormService: React.FC<FormServiceProps> = ({ mode, serviceData, onSuccess 
 
     const schema = yup.object().shape({
         name: yup.string().required("El nombre es obligatorio").min(3, "Debe tener al menos 3 caracteres"),
+
         price: yup
             .number()
             .required("El precio es obligatorio")
             .typeError("Debe ser un número")
+
             .min(0, "El precio debe ser válido"),
     });
 
@@ -62,12 +66,14 @@ const FormService: React.FC<FormServiceProps> = ({ mode, serviceData, onSuccess 
         width: 400,
         bgcolor: "background.paper",
         border: "2px solid #000",
+
         boxShadow: 24,
         p: 4,
     };
 
     return (
         <Box sx={style}>
+
             <Typography align="center" variant="h6" component="h2">
                 {mode === "create" ? "Agregar Servicio" : "Editar Servicio"}
             </Typography>
@@ -83,8 +89,7 @@ const FormService: React.FC<FormServiceProps> = ({ mode, serviceData, onSuccess 
                     helperText={errors.name?.message}
                     margin="normal"
                 />
-
-           
+ 
                 <TextField
                     {...register("price")}
                     fullWidth
@@ -94,10 +99,10 @@ const FormService: React.FC<FormServiceProps> = ({ mode, serviceData, onSuccess 
                     helperText={errors.price?.message}
                     margin="normal"
                 />
-
-               
+             
                 <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 2 }}>
                     {mode === "create" ? "Crear Servicio" : "Guardar Cambios"}
+
                 </Button>
             </form>
         </Box>
